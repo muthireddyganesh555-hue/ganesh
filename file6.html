@@ -1,105 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Weather Dashboard</title>
-
+    <title>Student Data Table</title>
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
             text-align: center;
-            background: #4facfe;
-            color: white;
-            padding: 40px;
         }
 
-        input, button {
+        h2 {
+            color: darkblue;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 70%;
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid black;
             padding: 10px;
-            font-size: 16px;
-            margin: 5px;
+            text-align: center;
         }
 
-        button {
-            cursor: pointer;
+        th {
+            background-color: #4CAF50;
+            color: white;
         }
 
-        #weather {
-            margin: 30px auto;
-            padding: 25px;
-            max-width: 400px;
-            background: white;
-            color: #222;
-            border-radius: 15px;
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #ddd;
         }
     </style>
 </head>
-
 <body>
 
-    <h1>🌤️ Weather Dashboard</h1>
+    <h2>Student Data Table</h2>
 
-    <input id="city" type="text" placeholder="Enter city" value="Mumbai">
-    <button onclick="getWeather()">Search</button>
+    <table>
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>Year</th>
+            <th>Marks</th>
+        </tr>
 
-    <div id="weather">
-        <h2>Weather Information</h2>
-        <p id="result">Enter a city and click Search</p>
-    </div>
+        <tr>
+            <td>101</td>
+            <td>Rahul</td>
+            <td>CSE</td>
+            <td>2nd</td>
+            <td>89</td>
+        </tr>
 
-    <script>
-        async function getWeather() {
+        <tr>
+            <td>102</td>
+            <td>Priya</td>
+            <td>ECE</td>
+            <td>3rd</td>
+            <td>92</td>
+        </tr>
 
-            const city = document.getElementById("city").value;
-            const result = document.getElementById("result");
+        <tr>
+            <td>103</td>
+            <td>Amit</td>
+            <td>EEE</td>
+            <td>1st</td>
+            <td>85</td>
+        </tr>
 
-            if (city === "") {
-                result.innerHTML = "Please enter a city.";
-                return;
-            }
+        <tr>
+            <td>104</td>
+            <td>Sneha</td>
+            <td>MECH</td>
+            <td>4th</td>
+            <td>90</td>
+        </tr>
 
-            result.innerHTML = "Loading...";
-
-            try {
-
-                // Get latitude and longitude
-                const geoResponse = await fetch(
-                    `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`
-                );
-
-                const geoData = await geoResponse.json();
-
-                if (!geoData.results) {
-                    result.innerHTML = "City not found.";
-                    return;
-                }
-
-                const location = geoData.results[0];
-
-                // Get weather
-                const weatherResponse = await fetch(
-                    `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m`
-                );
-
-                const weatherData = await weatherResponse.json();
-
-                const weather = weatherData.current;
-
-                // Display result
-                result.innerHTML = `
-                    <h2>${location.name}</h2>
-                    <p>🌡️ Temperature: ${weather.temperature_2m} °C</p>
-                    <p>💧 Humidity: ${weather.relative_humidity_2m}%</p>
-                    <p>💨 Wind Speed: ${weather.wind_speed_10m} km/h</p>
-                `;
-
-            } catch (error) {
-
-                result.innerHTML =
-                    "❌ Error fetching weather data.";
-
-                console.log(error);
-            }
-        }
-    </script>
+        <tr>
+            <td>105</td>
+            <td>Kiran</td>
+            <td>CIVIL</td>
+            <td>2nd</td>
+            <td>87</td>
+        </tr>
+    </table>
 
 </body>
 </html>
